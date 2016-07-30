@@ -14,9 +14,15 @@ defmodule Accessit do
     String.to_atom(key)
   end
 
+  defp convert_from_capture(%{"key" => "", "index" => "*"}) do
+    quote do Access.all() end
+  end
+
   defp convert_from_capture(%{"key" => "", "index" => index}) do
     index = String.to_integer(index)
     quote do Access.at(unquote(index)) end
   end
+
+
 
 end
